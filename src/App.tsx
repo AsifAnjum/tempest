@@ -6,6 +6,7 @@ import { addSearchedCity } from "./features/weather/weatherSlice";
 import { FlagType, flags } from "./assets/flags";
 import { useToast } from "./hooks/useToast";
 import { Toast } from "./components/toast";
+import useTheme from "./hooks/useTheme";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -68,7 +69,19 @@ function App() {
     }
   }, [data, isSuccess, dispatch]);
 
-  return content;
+  const { toggleTheme } = useTheme();
+
+  return (
+    <div className="bg-slate-300 dark:bg-slate-800 bg-cover p-20 ">
+      <div className="z-50 space-y-7">
+        <h1 className="text-3xl font-bold text-center">Weather App</h1>
+        <button className="cursor-pointer" onClick={toggleTheme}>
+          Toggle theme
+        </button>
+        <div>{content}</div>
+      </div>
+    </div>
+  );
 }
 
 export default App;

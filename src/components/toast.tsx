@@ -8,19 +8,22 @@ export interface ToastProps {
   onClose?: () => void;
 }
 
-const toastVariants = cva("fixed top-4 right-4 m-4 p-4 rounded-lg shadow-lg", {
-  variants: {
-    variant: {
-      success: "bg-green-400 text-white",
-      error: "bg-red-400 text-white",
-      info: "bg-blue-400 text-white",
-      warning: "bg-yellow-400 text-white",
+const toastVariants = cva(
+  "fixed top-4 left-1/2 transform -translate-x-1/2 duration-150 m-4 p-4 rounded-lg shadow-lg",
+  {
+    variants: {
+      variant: {
+        success: "bg-green-400 text-white",
+        error: "bg-red-400 text-white",
+        info: "bg-blue-400 text-white",
+        warning: "bg-yellow-400 text-white",
+      },
     },
-  },
-  defaultVariants: {
-    variant: "info",
-  },
-});
+    defaultVariants: {
+      variant: "info",
+    },
+  }
+);
 
 export const Toast = ({ message, variant, onClose }: ToastProps) => {
   return (

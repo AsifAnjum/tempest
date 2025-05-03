@@ -1,5 +1,2 @@
 @import "tailwindcss";
-
-body {
-  @apply p-20;
-}
+@custom-variant dark (&:where(.dark, .dark *));
