@@ -4,11 +4,14 @@ import { useFetchWeatherQuery } from "./features/weather/weatherApi";
 import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
 import { addSearchedCity } from "./features/weather/weatherSlice";
 import { FlagType, flags } from "./assets/flags";
+import { useToast } from "./hooks/useToast";
+import { Toast } from "./components/toast";
 
 function App() {
   const dispatch = useAppDispatch();
   const cities = useAppSelector((state) => state.weather.searchedCities);
 
+  const { toast, showToast, closeToast } = useToast();
   const { data, isLoading, isError, isSuccess } =
     useFetchWeatherQuery("khulna");
 
@@ -25,6 +28,13 @@ function App() {
     const flag = flags[data.sys.country as FlagType];
     content = (
       <div className="flex justify-between items-center">
+        {toast && (
+          <Toast
+            message={toast.message}
+            variant={toast.variant}
+            onClose={closeToast}
+          />
+        )}
         <div>
           <img
             src={flag}
@@ -53,6 +63,7 @@ function App() {
 
   useEffect(() => {
     if (isSuccess && data) {
+      showToast("Data fetched successfully", "success");
       dispatch(addSearchedCity({ id: data.id, city: data.name }));
     }
   }, [data, isSuccess, dispatch]);

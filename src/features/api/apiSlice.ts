@@ -9,6 +9,9 @@ export const apiSlice = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await baseQuery(args, api, extraOptions);
 
+    if (result.error) {
+      console.log("Something went wrong:");
+    }
     if (result.error?.status === 429) {
       console.log("Rate limit exceeded.");
     }
