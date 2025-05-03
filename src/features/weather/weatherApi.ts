@@ -32,6 +32,11 @@ interface WeatherResponse {
     };
     timezone: number;
   };
+  sys: {
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
 }
 
 export const weatherApi = apiSlice.injectEndpoints({
