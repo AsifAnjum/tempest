@@ -30,17 +30,26 @@ const weatherSlice = createSlice({
         state.searchedCities = state.searchedCities.filter(
           (c) => c.city !== action.payload.city
         );
-        state.searchedCities.push(action.payload);
+        state.searchedCities.unshift(action.payload);
       } else {
         if (state.searchedCities.length >= state.maxCities) {
           state.searchedCities.shift(); // Removed the oldest city
         }
-        state.searchedCities.push(action.payload);
+        state.searchedCities.unshift(action.payload);
       }
+    },
+    removeSearchedCity: (state, action: PayloadAction<number>) => {
+      state.searchedCities = state.searchedCities.filter(
+        (c) => c.id !== action.payload
+      );
+    },
+    clearSearchedCities: (state) => {
+      state.searchedCities = [];
     },
   },
 });
 
-export const { addSearchedCity } = weatherSlice.actions;
+export const { addSearchedCity, clearSearchedCities, removeSearchedCity } =
+  weatherSlice.actions;
 
 export default weatherSlice.reducer;

@@ -1,9 +1,10 @@
 import { apiSlice } from "../api/apiSlice";
 
-interface WeatherResponse {
+export interface WeatherResponse {
   // Define properties based on API response (example below)
   name: string;
   id: number;
+  cod: number | string;
   coord: {
     lon: number;
     lat: number;
@@ -37,6 +38,8 @@ interface WeatherResponse {
     sunrise: number;
     sunset: number;
   };
+  dt: number;
+  timezone: number;
 }
 
 export const weatherApi = apiSlice.injectEndpoints({
@@ -54,4 +57,4 @@ export const weatherApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useFetchWeatherQuery } = weatherApi;
+export const { useLazyFetchWeatherQuery } = weatherApi;
