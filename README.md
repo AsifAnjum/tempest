@@ -1,7 +1,7 @@
 # 🌦️ Tempest Forecast
 
 A simple and modern weather app built with Vite, React,Redux, Redux Persist, Redux Toolkit, and Tailwind CSS.  
-Live demo 👉 [tempest-forecast.netlify.app](https://tempest-forecast.netlify.app)
+Live demo 👉 [tempest-forecast.netlify.app](https://tempest-forcast.netlify.app/)
 
 ## 🚀 Features
 
