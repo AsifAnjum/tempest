@@ -71,7 +71,7 @@ export const Home = () => {
 
   const { theme } = useTheme();
 
-  const mainClass = cva("min-h-screen p-4 md:p-8 bg-gradient-to-b", {
+  const mainClass = cva("min-h-screen p-4 md:p-8 bg-gradient-to-t", {
     variants: {
       theme: {
         light: " from-slate-200 via-slate-100 to-blue-100",
@@ -94,6 +94,7 @@ export const Home = () => {
           <div className="2xl:col-span-3 order-1 2xl:order-2">{content}</div>
         </div>
       </div>
+
       {toast && (
         <Toast
           message={toast.message!}

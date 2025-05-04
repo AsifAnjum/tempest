@@ -4,18 +4,25 @@ export const kelvinToCelsius = (tempK: number) => {
   return celsius.toFixed(2);
 };
 
-export const dateString = (date: number) => {
+export const dateString = (date: number, dayOnly = false) => {
   const d = new Date(date * 1000); // Convert seconds to milliseconds
+  let formattedDate;
 
-  const formattedDate = d.toLocaleString("en-US", {
-    weekday: "long",
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    // hour: "numeric",
-    // minute: "numeric",
-    // hour12: true,
-  });
+  if (dayOnly) {
+    formattedDate = d.toLocaleDateString("en-US", {
+      weekday: "long",
+      hour12: true,
+      hour: "2-digit",
+    });
+  } else {
+    formattedDate = d.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
+
   return formattedDate;
 };
 

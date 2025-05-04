@@ -55,16 +55,16 @@ export const RecentSearched = ({ onSearch }: RecentSearchedProps) => {
   }
 
   return (
-    <div className="dark:bg-slate-900 bg-blue-100/40 dark:text-white rounded-lg shadow-xl p-4 mt-4">
+    <div className="dark:bg-slate-900 bg-blue-100/40 border border-slate-300 dark:border-slate-700 dark:text-white rounded-lg shadow-xl p-4 mt-4">
       <div>
         <div className="text-lg flex items-center justify-between">
           <div>
             <ClockIcon className="size-5 inline" />
-            <span className="ml-2">Recent Searches</span>
+            <span className="ml-2 font-semibold">Recent Searches</span>
           </div>
           <button
             onClick={() => dispatch(clearSearchedCities())}
-            className="text-[15px] font-semibold text-red-400 hover:text-red-500 transition-colors duration-200 hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-[15px] font-semibold text-red-500 hover:text-red-600 transition-colors duration-200 hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={searchedCities.length === 0}
           >
             Clear

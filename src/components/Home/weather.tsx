@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { flags, FlagType } from "../../assets/flags";
 import { WeatherResponse } from "../../features/weather/weatherApi";
 import {
@@ -6,21 +7,50 @@ import {
   kelvinToCelsius,
   msToKmh,
 } from "../../lib/util";
+import { CalenderIcon } from "../icons/calenderIcon";
 import { ClockIcon } from "../icons/clockIcon";
 import { DropletsIcon } from "../icons/dropletsIcon";
 import { MapPinIcon } from "../icons/mapPinIcon";
 
 import { ThermometerIcon } from "../icons/thermometerIcon";
 import { WindIcon } from "../icons/windIcon";
+import { Forecast } from "./Forecast";
 
 export const Weather = ({ data }: { data: WeatherResponse }) => {
+  const [isShowForecast, setIsShowForecast] = useState(false);
   const flag = flags[data.sys.country as FlagType];
+
+  useEffect(() => {
+    setIsShowForecast(false);
+  }, [data]);
+
+  let forecastContent;
+  if (!isShowForecast) {
+    forecastContent = (
+      <button
+        onClick={() => setIsShowForecast(true)}
+        className="flex bg-indigo-400 p-2 rounded-lg mx-auto"
+      >
+        <CalenderIcon className="mr-2 text-[#c8ced3]" />
+        <span className="text-slate-300">Show Forecast</span>
+      </button>
+    );
+  } else {
+    forecastContent = (
+      <Forecast
+        lat={data.coord.lat}
+        lon={data.coord.lon}
+        isShowForecast={isShowForecast}
+      />
+    );
+  }
+
   return (
-    <div className="">
+    <>
       <figure className="flex justify-center mb-4">
         <img src={flag} alt="" className="size-56" />
       </figure>
-      {/* Current Weather */}
+
       <div className="mb-8">
         <div className="bg-gradient-to-r from-sky-600 to-blue-600 text-white p-6 rounded-t-lg">
           <div className="flex justify-between items-center">
@@ -47,7 +77,7 @@ export const Weather = ({ data }: { data: WeatherResponse }) => {
             </div>
           </div>
         </div>
-        <div className="grid dark:bg-[#0f3357] bg-[#c0c9d3] rounded-b-lg grid-cols-2 md:grid-cols-4 gap-4 p-6 text-slate-300">
+        <div className="grid dark:bg-[#0f3357] bg-[#b1cae7] rounded-b-lg grid-cols-2 md:grid-cols-4 gap-4 p-6 dark:text-slate-300">
           <div className="flex items-center">
             <ThermometerIcon className="mr-2 text-orange-500" />
             <div>
@@ -80,6 +110,9 @@ export const Weather = ({ data }: { data: WeatherResponse }) => {
           </div>
         </div>
       </div>
-    </div>
+
+      {/* forecastContent */}
+      {forecastContent}
+    </>
   );
 };

@@ -42,6 +42,19 @@ export interface WeatherResponse {
   timezone: number;
 }
 
+export interface ForecastResponse {
+  list: {
+    dt: number;
+    main: {
+      temp: number;
+    };
+    weather: {
+      main: string;
+      icon: string;
+    }[];
+  }[];
+}
+
 export const weatherApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchWeather: builder.query<WeatherResponse, string>({
@@ -54,7 +67,21 @@ export const weatherApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+    fetchForecast: builder.query<
+      ForecastResponse,
+      { lat: number; lon: number }
+    >({
+      query: ({ lat, lon }: { lat: number; lon: number }) => ({
+        url: "forecast",
+        method: "GET",
+        params: {
+          lat: lat,
+          lon: lon,
+          appid: import.meta.env.VITE_APP_API_KEY,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useLazyFetchWeatherQuery } = weatherApi;
+export const { useLazyFetchWeatherQuery, useFetchForecastQuery } = weatherApi;
