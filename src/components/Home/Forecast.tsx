@@ -1,5 +1,6 @@
 import { useFetchForecastQuery } from "../../features/weather/weatherApi";
 import { dateString, kelvinToCelsius } from "../../lib/util";
+import { NotFound } from "../ui/NotFound";
 import { Skeleton } from "../ui/Skeleton";
 
 interface ForecastProps {
@@ -29,7 +30,7 @@ export const Forecast = ({ lat, lon, isShowForecast }: ForecastProps) => {
     );
   }
   if (isError) {
-    return <div className="text-center">Error fetching forecast</div>;
+    return <NotFound message="Forecast Not Available" />;
   }
 
   if (!data) {

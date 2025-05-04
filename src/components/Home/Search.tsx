@@ -30,13 +30,9 @@ export const Search = ({ isLoading, onSearch }: SearchProps) => {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for a city..."
           required
-          className="pl-10 py-5 rounded-full w-full dark:border-slate-200 border-2 focus:outline-none dark:placeholder:text-slate-400 placeholder:text-slate-800 focus:border-sky-600 border-slate-700"
+          className="search-field"
         />
-        <button
-          type="submit"
-          className="absolute right-1 bg-sky-600 hover:bg-sky-700 text-white rounded-full px-4 py-2"
-          disabled={isLoading}
-        >
+        <button type="submit" className="form-button" disabled={isLoading}>
           {isLoading ? (
             "Searching..."
           ) : (

@@ -7,3 +7,15 @@
     cursor: pointer;
   }
 }
+
+.theme-button {
+  @apply p-2 rounded-full bg-slate-700 hover:bg-slate-600 transition-colors;
+}
+
+.search-field {
+  @apply pl-10 py-5 rounded-full w-full dark:border-slate-200 border-2 focus:outline-none dark:placeholder:text-slate-400 placeholder:text-slate-800 focus:border-sky-600 border-slate-700;
+}
+
+.form-button {
+  @apply absolute right-1 bg-sky-600 hover:bg-sky-700 text-white rounded-full px-4 py-2;
+}
